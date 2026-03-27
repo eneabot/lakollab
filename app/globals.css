@@ -1,26 +1,191 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap');
+
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* New brand palette */
+  --red: #E63946;
+  --yellow: #FFD166;
+  --blue-light: #A8DADC;
+  --blue: #457B9D;
+  --bg: #F8F9FA;
+  --bg-dark: #EEF0F2;
+  --text: #1D1D1D;
+  --text-muted: #6C757D;
+  --white: #FFFFFF;
+  --black: #1D1D1D;
+
+  /* Section backgrounds */
+  --section-blue: #1D3557;
+  --section-blue-mid: #2A4A6B;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
+  width: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  width: 100%;
 }
+
+/* ---- Accent bar ---- */
+.accent-bar {
+  height: 5px;
+  background: linear-gradient(90deg,
+    var(--red) 0%, var(--red) 33%,
+    var(--yellow) 33%, var(--yellow) 66%,
+    var(--blue-light) 66%, var(--blue-light) 100%
+  );
+  width: 100%;
+}
+
+.accent-bar-sm {
+  height: 3px;
+  width: 48px;
+  background: var(--red);
+  display: block;
+}
+
+/* ---- Typography ---- */
+.font-display {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.font-heading {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+}
+
+/* ---- Tag / badge ---- */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--yellow);
+  color: var(--black);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 3px 10px 3px 8px;
+  border-radius: 2px;
+}
+
+.tag-red { background: var(--red); color: var(--white); }
+.tag-blue { background: var(--blue); color: var(--white); }
+.tag-blue-light { background: var(--blue-light); color: var(--black); }
+
+/* ---- Marquee ---- */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 25s linear infinite;
+}
+.marquee-track:hover { animation-play-state: paused; }
+
+/* ---- Card hover ---- */
+.card-hover {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.card-hover:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+}
+
+/* ---- Scrollbar ---- */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--red); }
+
+/* ---- Selection ---- */
+::selection { background: var(--yellow); color: var(--black); }
+
+/* ---- Section title underline ---- */
+.title-line {
+  display: inline-block;
+  position: relative;
+}
+.title-line::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 48px;
+  height: 4px;
+  background: var(--red);
+  border-radius: 2px;
+}
+
+/* ---- Button styles ---- */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--red);
+  color: var(--white);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  padding: 14px 28px;
+  border-radius: 4px;
+  transition: background 0.2s, transform 0.2s;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+.btn-primary:hover { background: #c1121f; transform: translateY(-2px); }
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--text);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 13px 28px;
+  border-radius: 4px;
+  border: 2px solid var(--text);
+  transition: all 0.2s;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn-secondary:hover { background: var(--text); color: var(--white); }
+
+.btn-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--blue);
+  color: var(--white);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 14px 28px;
+  border-radius: 4px;
+  transition: all 0.2s;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+.btn-cta:hover { background: #2d5f80; transform: translateY(-2px); }
